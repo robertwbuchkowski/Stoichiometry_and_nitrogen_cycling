@@ -1,0 +1,374 @@
+LaunchKernels[]
+(*Which scenario to run*)
+sc=8;
+(*Number of replicates*)
+reps = 4;
+
+dH = eh*Vhp*H*P - th*H - Wnh*H;
+
+dP = Vpn*P*Iorg - tp*P - Vhp*H*P ;
+
+dM = Vmd*M*Dn - Vfm*Dv*M -tm*M- Wnm*M + Vmn*M*Iorg;
+
+dDv = ef*(Vfd*Dv*Dn + Vfm*Dv*M) -tf*Dv - Wnf*Dv;
+
+dDn = tm*M+ tf*Dv + tp*P +th*H -Vfd*Dv*Dn - Vmd*M*Dn -l*Dn + (1-eh)*Vhp*H*P + (1-ef)*(Vfd*Dv*Dn + Vfm*Dv*M);
+
+dDc = μ*tm*M+ ϕ*tf*Dv + ω*tp*P +η*th*H -Vfd*Dv*Dc - Vmd*M*Dc-l*Dc + ω*(1-eh)*Vhp*H*P+ (1-ef)*(Vfd*Dv*Dc+  μ*Vfm*Dv*M);
+
+dIorg = IN - q*Iorg  -Vpn*P*Iorg + Wnm*M +Wnf*Dv +Wnh*H - Vmn*M*Iorg;
+
+dHc = eh*ω*Vhp*H*P - η*th*H - η*Wch*H;
+
+dPc = ω*Vpn*P*Iorg- ω*tp*P - ω*Vhp*H*P ;
+
+dMc = Vmd*M*Dc - μ*Vfm*Dv*M -μ*tm*M- μ*Wcm*M;
+
+dDvc = ef*(Vfd*Dv*Dc + μ*Vfm*Dv*M) -ϕ*tf*Dv -ϕ*Wcf*Dv;
+Wnj = {{exm, exf, exh},{Dn Vmd+Iorg Vmn+rm-(Dc Vmd)/μ, exf, exh},{Dn Vmd+Iorg Vmn+rm-(Dc Vmd)/μ,exf,((η-ω)/η)*eh*Vhp*P+rh},{Dn Vmd+Iorg Vmn+rm-(Dc Vmd)/μ,Dn ef Vfd+ef M Vfm+rf-(Dc ef Vfd)/ϕ-(ef M Vfm μ)/ϕ,exh},{Dn Vmd+Iorg Vmn+rm-(Dc Vmd)/μ,Dn ef Vfd+ef M Vfm+rf-(Dc ef Vfd)/ϕ-(ef M Vfm μ)/ϕ,((η-ω)/η)*eh*Vhp*P+rh},{exm,exf,((η-ω)/η)*eh*Vhp*P+rh},{exm,Dn ef Vfd+ef M Vfm+rf-(Dc ef Vfd)/ϕ-(ef M Vfm μ)/ϕ,exh},{exm,Dn ef Vfd+ef M Vfm+rf-(Dc ef Vfd)/ϕ-(ef M Vfm μ)/ϕ,((η-ω)/η)*eh*Vhp*P+rh}};
+
+Wcj = {{-Dn Vmd-Iorg Vmn+exm+(Dc Vmd)/μ, exf+(Dn Vfd ef(Dc/Dn-ϕ)+M Vfm ef(μ-ϕ))/ϕ, (ω-η)*Vhp*P*eh/η + exh},{rm, exf+(Dn Vfd ef(Dc/Dn-ϕ)+M Vfm ef(μ-ϕ))/ϕ, (ω-η)*Vhp*P*eh/η + exh},{rm,exf+(Dn Vfd ef(Dc/Dn-ϕ)+M Vfm ef(μ-ϕ))/ϕ,rh},{rm, rf,(ω-η)*Vhp*P*eh/η + exh},{rm, rf,rh},{-Dn Vmd-Iorg Vmn+exm+(Dc Vmd)/μ,exf+(Dn Vfd ef(Dc/Dn-ϕ)+M Vfm ef(μ-ϕ))/ϕ,rh},{-Dn Vmd-Iorg Vmn+exm+(Dc Vmd)/μ, rf,(ω-η)*Vhp*P*eh/η + exh},{-Dn Vmd-Iorg Vmn+exm+(Dc Vmd)/μ, rf,rh}};
+{Wnm,Wnf,Wnh} = Wnj[[sc,All]];
+{Wcm,Wcf,Wch} = Wcj[[sc,All]];
+dH5 = eh*Vhp*H5*P5 - th*H5 - Wnh5*H5;
+
+dP5 = Vpn*P5*Iorg5 - tp*P5 - Vhp*H5*P5 ;
+
+dM5 = Vmd*M5*Dn5 - Vfm*Dv5*M5 -tm*M5- Wnm5*M5+ Vmn*M5*Iorg5;
+
+dDv5=  ef*(Vfd*Dv5*Dn5 + Vfm*Dv5*M5) -tf*Dv5 - Wnf5*Dv5;
+
+dDn5 = tm*M5+ tf*Dv5 + tp*P5 +th*H5 -Vfd*Dv5*Dn5 - Vmd*M5*Dn5 -l*Dn5+ (1-eh)*Vhp*H5*P5 + (1-ef)*(Vfd*Dv5*Dn5 + Vfm*Dv5*M5);
+
+dDc5 = μ*tm*M5+ ϕ*tf*Dv5 + ω*tp*P5 +η*th*H5 -Vfd*Dv5*Dc5 - Vmd*M5*Dc5-l*Dc5 + ω*(1-eh)*Vhp*H5*P5+ (1-ef)*(Vfd*Dv5*Dc5+  μ*Vfm*Dv5*M5);
+
+dIorg5= IN - q*Iorg5  -Vpn*P5*Iorg5 + Wnm5*M5 +Wnf5*Dv5 +Wnh5*H5- Vmn*M5*Iorg5;
+
+Wnj5 = {{exm, exf, exh},{Dn5 Vmd+Iorg5 Vmn+rm-(Dc5 Vmd)/μ, exf, exh},{Dn5 Vmd+Iorg5 Vmn+rm-(Dc5 Vmd)/μ,exf,((η-ω)/η)*eh*Vhp*P5+rh},{Dn5 Vmd+Iorg5 Vmn+rm-(Dc5 Vmd)/μ,Dn5 ef Vfd+ef M5 Vfm+rf-(Dc5 ef Vfd)/ϕ-(ef M5 Vfm μ)/ϕ,exh},{Dn5 Vmd+Iorg5 Vmn+rm-(Dc5 Vmd)/μ,Dn5 ef Vfd+ef M5 Vfm+rf-(Dc5 ef Vfd)/ϕ-(ef M5 Vfm μ)/ϕ,((η-ω)/η)*eh*Vhp*P5+rh},{exm,exf,((η-ω)/η)*eh*Vhp*P5+rh},{exm,Dn5 ef Vfd+ef M5 Vfm+rf-(Dc5 ef Vfd)/ϕ-(ef M5 Vfm μ)/ϕ,exh},{exm,Dn5 ef Vfd+ef M5 Vfm+rf-(Dc5 ef Vfd)/ϕ-(ef M5 Vfm μ)/ϕ,((η-ω)/η)*eh*Vhp*P5+rh}};
+
+Wcj5 = {{-Dn5 Vmd-Iorg5 Vmn+exm+(Dc5 Vmd)/μ, exf+(Dn5 Vfd ef(Dc5/Dn5-ϕ)+M5 Vfm ef(μ-ϕ))/ϕ, (ω-η)*Vhp*P5*eh/η + exh},{rm, exf+(Dn5 Vfd ef(Dc5/Dn5-ϕ)+M5 Vfm ef(μ-ϕ))/ϕ, (ω-η)*Vhp*P5*eh/η + exh},{rm,exf+(Dn5 Vfd ef(Dc5/Dn5-ϕ)+M5 Vfm ef(μ-ϕ))/ϕ,rh},{rm, rf,(ω-η)*Vhp*P5*eh/η + exh},{rm, rf,rh},{-Dn5 Vmd-Iorg5 Vmn+exm+(Dc5 Vmd)/μ,exf+(Dn5 Vfd ef(Dc5/Dn5-ϕ)+M5 Vfm ef(μ-ϕ))/ϕ,rh},{-Dn5 Vmd-Iorg5 Vmn+exm+(Dc5 Vmd)/μ, rf,(ω-η)*Vhp*P5*eh/η + exh},{-Dn5 Vmd-Iorg5 Vmn+exm+(Dc5 Vmd)/μ, rf,rh}};
+
+{Wnm5,Wnf5,Wnh5} = Wnj5[[sc,All]];
+{Wcm5,Wcf5,Wch5} = Wcj5[[sc,All]];
+
+JacobianMatrix[fns_List, vars_List]:=Outer[D,fns,vars];
+J=JacobianMatrix[{dH5,dP5,dM5,dDv5,dDn5,dDc5,dIorg5},{H5,P5,M5,Dv5,Dn5,Dc5, Iorg5}];
+solex = Solve[{dP==0, dM==0, dDn==0,dIorg==0, dH==0, dDv==0},{P,M,Dn,Iorg, H, Dv}]/. Rule-> List;
+solex2 =Select[solex[[All,All,2]], Not[MemberQ[#,0]]&];
+output= ParallelTable[
+aa=0;
+positivesolutions = 0;
+k =11;
+While[k>10,
+{IN,q,l,Vpn,Vhp, Vfd, Vfm, Vmd, Vmn,rm,rh,rf,exm,exf,exh,tp,th, tm, tf} = RandomReal[{0,100},19];
+ϕ=RandomReal[{3,10}];
+ω=RandomReal[{5,150}];
+η=RandomReal[{3,10}]; 
+μ=RandomReal[{4,25}];
+eh =RandomReal[{0,1}];
+ef =RandomReal[{0,1}];
+
+
+checkB = {};
+checkA =Solve[{P==solex2[[1,1]], M==solex2[[1,2]],Dn==solex2[[1,3]],Iorg==solex2[[1,4]], H==solex2[[1,5]], Dv==solex2[[1,6]],dDc==0},{P,M,Dn,Dc,Iorg, H, Dv}]/. Rule-> List;
+If[Dimensions[solex2][[1]]==2,
+checkB =Solve[{P==solex2[[2,1]], M==solex2[[2,2]],Dn==solex2[[2,3]],Iorg==solex2[[2,4]], H==solex2[[2,5]], Dv==solex2[[2,6]],dDc==0},{P,M,Dn,Dc,Iorg, H, Dv}]/. Rule-> List
+];
+ checkcheck = Select[Flatten[{checkA[[All,All,2]],checkB[[All,All,2]]},1],Count[#,_Complex]==0&&Count[#,_?Positive]==7&];
+
+If[Dimensions[checkcheck][[1]]==1,
+
+positivesolutions++;
+
+{P5,M5,Dn5,Dc5,Iorg5,H5,Dv5}=Flatten[checkcheck];
+rmax=Max[Re[Eigenvalues[J]]];
+phck=Max[{eh*ω*Vhp*P5/(Wch5*η), ef*(Vfd*Dc5+μ*Vfm*M5)/(ϕ*Wcf5)}];
+
+If[Total[Boole[Positive[{P5,M5,Dn5,Dc5,Iorg5,H5,Dv5}]]]==7&&rmax<0&&phck<19.4&&Wnf5>0&&Wnh5>0&&Wnm5>0&&Wcf5>0&&Wch5>0&&Wcm5>0,k=9; aa++;];
+
+];
+];
+resultsout = {IN,q,l,Vpn,Vhp, Vfd, Vfm, Vmd, Vmn,rm,rh,rf,exm,exf,exh,tp,th, tm, tf,η,ω,μ,ϕ,ef,eh,positivesolutions,aa,rmax, phck,  Wnf5,Wnh5, Wnm5, Wcf5,Wch5, Wcm5,P5,M5,Dn5,Dc5,Iorg5,H5,Dv5};
+
+checkcheck =checkcheck//N;
+
+DERout = ConstantArray[ConstantArray[NA, 7],8];
+(*Save original values*)
+ω2 = ω;
+IN2 = IN;
+μ2 = μ;
+Vhp2 = Vhp;
+Vfd2= Vfd;
+Vfm2 = Vfm;
+Vmd2 = Vmd;
+Vmn2 = Vmn;
+Do[
+modvec={0,0,0,0,0,0,0,0};
+modvec[[dd]]=0.000001;
+{ω, IN, μ, Vhp, Vfd, Vfm, Vmd,Vmn} = {ω, IN, μ, Vhp, Vfd, Vfm, Vmd,Vmn}+modvec;
+checkB = {};
+checkA =Solve[{P==solex2[[1,1]], M==solex2[[1,2]],Dn==solex2[[1,3]],Iorg==solex2[[1,4]], H==solex2[[1,5]], Dv==solex2[[1,6]],dDc==0},{P,M,Dn,Dc,Iorg, H, Dv}]/. Rule-> List;
+If[Dimensions[solex2][[1]]==2,
+checkB =Solve[{P==solex2[[2,1]], M==solex2[[2,2]],Dn==solex2[[2,3]],Iorg==solex2[[2,4]], H==solex2[[2,5]], Dv==solex2[[2,6]],dDc==0},{P,M,Dn,Dc,Iorg, H, Dv}]/. Rule-> List
+];
+checkcheck2= Select[Flatten[{checkA[[All,All,2]],checkB[[All,All,2]]},1],Count[#,_Complex]==0&&Count[#,_?Positive]==7&];
+
+If[Dimensions[checkcheck2][[1]]==1,DERout [[dd,All]]=(Flatten[checkcheck2]-Flatten[checkcheck])/0.000001];
+(*Return to original values*)
+ω = ω2;
+IN = IN2;
+μ = μ2;
+Vhp = Vhp2;
+Vfd= Vfd2;
+Vfm = Vfm2;
+Vmd = Vmd2;
+Vmn = Vmn2;,
+{dd,1,8,1}];
+
+Flatten[{resultsout,DERout}],
+{rep,1,reps}];
+Export[FileNameJoin@{"ParamEqbmDERout_Sc"<>ToString[sc]<>"_"<>{ToString/@Date[][[1;;5]]}<>".csv"},output];
+p1 = output[[All,1;;25]];
+Clear[output];
+
+omegaoutput= ParallelTable[
+
+{IN,q,l,Vpn,Vhp, Vfd, Vfm, Vmd, Vmn,rm,rh,rf,exm,exf,exh,tp,th, tm, tf,η,ω,μ,ϕ,ef,eh}= p1[[rep,1;;25]];
+
+checkB = {};
+checkA =Solve[{P==solex2[[1,1]], M==solex2[[1,2]],Dn==solex2[[1,3]],Iorg==solex2[[1,4]], H==solex2[[1,5]], Dv==solex2[[1,6]],dDc==0},{P,M,Dn,Dc,Iorg, H, Dv}]/. Rule-> List;
+If[Dimensions[solex2][[1]]==2,
+checkB =Solve[{P==solex2[[2,1]], M==solex2[[2,2]],Dn==solex2[[2,3]],Iorg==solex2[[2,4]], H==solex2[[2,5]], Dv==solex2[[2,6]],dDc==0},{P,M,Dn,Dc,Iorg, H, Dv}]/. Rule-> List
+];
+ checkcheck = Select[Flatten[{checkA[[All,All,2]],checkB[[All,All,2]]},1],Count[#,_Complex]==0&&Count[#,_?Positive]==7&];
+{P5,M5,Dn5,Dc5,Iorg5,H5,Dv5}=Flatten[checkcheck];
+r5=Max[Re[Eigenvalues[J]]];
+phck5=Max[{eh*ω*Vhp*P5/(Wch5*η), ef*(Vfd*Dc5+μ*Vfm*M5)/(ϕ*Wcf5)}];
+Wci = Wnf5>0&&Wnh5>0 &&Wnm5>0&&Wcf5>0&&Wch5>0 &&Wcm5>0;
+ω2 = ω;
+IN2 = IN;
+μ2 = μ;
+eqbmomega = ConstantArray[ConstantArray[NA,16],100];
+ω = ω2;
+IN = IN2;
+μ = μ2;
+While[Total[Boole[Positive[{P5,M5,Dn5,Dc5,Iorg5,H5,Dv5}]]]==7&&r5<0&&phck5<19.4&&Wci&& ω>5,
+
+ω = ω-1.5;
+
+checkB = {};
+checkA =Solve[{P==solex2[[1,1]], M==solex2[[1,2]],Dn==solex2[[1,3]],Iorg==solex2[[1,4]], H==solex2[[1,5]], Dv==solex2[[1,6]],dDc==0},{P,M,Dn,Dc,Iorg, H, Dv}]/. Rule-> List;
+If[Dimensions[solex2][[1]]==2,
+checkB =Solve[{P==solex2[[2,1]], M==solex2[[2,2]],Dn==solex2[[2,3]],Iorg==solex2[[2,4]], H==solex2[[2,5]], Dv==solex2[[2,6]],dDc==0},{P,M,Dn,Dc,Iorg, H, Dv}]/. Rule-> List
+];
+ checkcheck = Select[Flatten[{checkA[[All,All,2]],checkB[[All,All,2]]},1],Count[#,_Complex]==0&&Count[#,_?Positive]==7&];
+If[Dimensions[checkcheck][[1]]==1,
+{P5,M5,Dn5,Dc5,Iorg5,H5,Dv5}=Flatten[checkcheck];
+r5=Max[Re[Eigenvalues[J]]];
+phck5=Max[{eh*ω*Vhp*P5/(Wch5*η), ef*(Vfd*Dc5+μ*Vfm*M5)/(ϕ*Wcf5)}];
+Wci = Wnf5>0&&Wnh5>0 &&Wnm5>0&&Wcf5>0&&Wch5>0 &&Wcm5>0;,
+Break[]];
+
+];
+ω = ω+1.5;
+checkB = {};
+checkA =Solve[{P==solex2[[1,1]], M==solex2[[1,2]],Dn==solex2[[1,3]],Iorg==solex2[[1,4]], H==solex2[[1,5]], Dv==solex2[[1,6]],dDc==0},{P,M,Dn,Dc,Iorg, H, Dv}]/. Rule-> List;
+If[Dimensions[solex2][[1]]==2,
+checkB =Solve[{P==solex2[[2,1]], M==solex2[[2,2]],Dn==solex2[[2,3]],Iorg==solex2[[2,4]], H==solex2[[2,5]], Dv==solex2[[2,6]],dDc==0},{P,M,Dn,Dc,Iorg, H, Dv}]/. Rule-> List
+];
+ checkcheck = Select[Flatten[{checkA[[All,All,2]],checkB[[All,All,2]]},1],Count[#,_Complex]==0&&Count[#,_?Positive]==7&];
+
+{P5,M5,Dn5,Dc5,Iorg5,H5,Dv5}=Flatten[checkcheck];
+r5=Max[Re[Eigenvalues[J]]];
+phck5=Max[{eh*ω*Vhp*P5/(Wch5*η), ef*(Vfd*Dc5+μ*Vfm*M5)/(ϕ*Wcf5)}];
+Wci = Wnf5>0&&Wnh5>0 &&Wnm5>0&&Wcf5>0&&Wch5>0 &&Wcm5>0;
+positioningrad = 1;
+eqbmomega [[positioningrad,All]] = {P5,M5,Dn5,Dc5,Iorg5,H5,Dv5,ω,r5, phck5,  Wnf5,Wnh5, Wnm5, Wcf5,Wch5, Wcm5};
+
+While[Total[Boole[Positive[{P5,M5,Dn5,Dc5,Iorg5,H5,Dv5}]]]==7&&r5<0&&phck5<19.4&&Wci&&positioningrad<100&& ω<150,
+ω = ω+1.5;
+
+checkB = {};
+checkA =Solve[{P==solex2[[1,1]], M==solex2[[1,2]],Dn==solex2[[1,3]],Iorg==solex2[[1,4]], H==solex2[[1,5]], Dv==solex2[[1,6]],dDc==0},{P,M,Dn,Dc,Iorg, H, Dv}]/. Rule-> List;
+If[Dimensions[solex2][[1]]==2,
+checkB =Solve[{P==solex2[[2,1]], M==solex2[[2,2]],Dn==solex2[[2,3]],Iorg==solex2[[2,4]], H==solex2[[2,5]], Dv==solex2[[2,6]],dDc==0},{P,M,Dn,Dc,Iorg, H, Dv}]/. Rule-> List
+];
+ checkcheck = Select[Flatten[{checkA[[All,All,2]],checkB[[All,All,2]]},1],Count[#,_Complex]==0&&Count[#,_?Positive]==7&];
+
+If[Dimensions[checkcheck][[1]]==1,
+
+{P5,M5,Dn5,Dc5,Iorg5,H5,Dv5}=Flatten[checkcheck];
+r5=Max[Re[Eigenvalues[J]]];
+phck5=Max[{eh*ω*Vhp*P5/(Wch5*η), ef*(Vfd*Dc5+μ*Vfm*M5)/(ϕ*Wcf5)}];
+Wci = Wnf5>0&&Wnh5>0 &&Wnm5>0&& Wcf5>0&&Wch5>0 &&Wcm5>0;
+eqbmomega [[positioningrad,All]] = {P5,M5,Dn5,Dc5,Iorg5,H5,Dv5,ω,r5, phck5,  Wnf5,Wnh5, Wnm5, Wcf5,Wch5, Wcm5};
+positioningrad++;
+,Break[];
+
+];
+];
+eqbmomega,
+{rep,1,reps}];
+
+Export[FileNameJoin@{"Sc"<>ToString[sc]<>"_omega_gradient_1pt5_.csv"},Flatten[omegaoutput,1]];
+muoutput= ParallelTable[
+
+{IN,q,l,Vpn,Vhp, Vfd, Vfm, Vmd, Vmn,rm,rh,rf,exm,exf,exh,tp,th, tm, tf,η,ω,μ,ϕ,ef,eh}= p1[[rep,1;;25]];
+
+checkB = {};
+checkA =Solve[{P==solex2[[1,1]], M==solex2[[1,2]],Dn==solex2[[1,3]],Iorg==solex2[[1,4]], H==solex2[[1,5]], Dv==solex2[[1,6]],dDc==0},{P,M,Dn,Dc,Iorg, H, Dv}]/. Rule-> List;
+If[Dimensions[solex2][[1]]==2,
+checkB =Solve[{P==solex2[[2,1]], M==solex2[[2,2]],Dn==solex2[[2,3]],Iorg==solex2[[2,4]], H==solex2[[2,5]], Dv==solex2[[2,6]],dDc==0},{P,M,Dn,Dc,Iorg, H, Dv}]/. Rule-> List
+];
+ checkcheck = Select[Flatten[{checkA[[All,All,2]],checkB[[All,All,2]]},1],Count[#,_Complex]==0&&Count[#,_?Positive]==7&];
+{P5,M5,Dn5,Dc5,Iorg5,H5,Dv5}=Flatten[checkcheck];
+r5=Max[Re[Eigenvalues[J]]];
+phck5=Max[{eh*ω*Vhp*P5/(Wch5*η), ef*(Vfd*Dc5+μ*Vfm*M5)/(ϕ*Wcf5)}];
+Wci = Wnf5>0&&Wnh5>0 &&Wnm5>0&&Wcf5>0&&Wch5>0 &&Wcm5>0;
+ω2 = ω;
+IN2 = IN;
+μ2 = μ;
+eqbmomega = ConstantArray[ConstantArray[NA,16],100];
+ω = ω2;
+IN = IN2;
+μ = μ2;
+While[Total[Boole[Positive[{P5,M5,Dn5,Dc5,Iorg5,H5,Dv5}]]]==7&&r5<0&&phck5<19.4&&Wci&& μ>4,
+
+μ = μ-0.2;
+
+checkB = {};
+checkA =Solve[{P==solex2[[1,1]], M==solex2[[1,2]],Dn==solex2[[1,3]],Iorg==solex2[[1,4]], H==solex2[[1,5]], Dv==solex2[[1,6]],dDc==0},{P,M,Dn,Dc,Iorg, H, Dv}]/. Rule-> List;
+If[Dimensions[solex2][[1]]==2,
+checkB =Solve[{P==solex2[[2,1]], M==solex2[[2,2]],Dn==solex2[[2,3]],Iorg==solex2[[2,4]], H==solex2[[2,5]], Dv==solex2[[2,6]],dDc==0},{P,M,Dn,Dc,Iorg, H, Dv}]/. Rule-> List
+];
+ checkcheck = Select[Flatten[{checkA[[All,All,2]],checkB[[All,All,2]]},1],Count[#,_Complex]==0&&Count[#,_?Positive]==7&];
+If[Dimensions[checkcheck][[1]]==1,
+{P5,M5,Dn5,Dc5,Iorg5,H5,Dv5}=Flatten[checkcheck];
+r5=Max[Re[Eigenvalues[J]]];
+phck5=Max[{eh*ω*Vhp*P5/(Wch5*η), ef*(Vfd*Dc5+μ*Vfm*M5)/(ϕ*Wcf5)}];
+Wci = Wnf5>0&&Wnh5>0 &&Wnm5>0&&Wcf5>0&&Wch5>0 &&Wcm5>0;,
+Break[]];
+
+];
+μ = μ+0.2;
+checkB = {};
+checkA =Solve[{P==solex2[[1,1]], M==solex2[[1,2]],Dn==solex2[[1,3]],Iorg==solex2[[1,4]], H==solex2[[1,5]], Dv==solex2[[1,6]],dDc==0},{P,M,Dn,Dc,Iorg, H, Dv}]/. Rule-> List;
+If[Dimensions[solex2][[1]]==2,
+checkB =Solve[{P==solex2[[2,1]], M==solex2[[2,2]],Dn==solex2[[2,3]],Iorg==solex2[[2,4]], H==solex2[[2,5]], Dv==solex2[[2,6]],dDc==0},{P,M,Dn,Dc,Iorg, H, Dv}]/. Rule-> List
+];
+ checkcheck = Select[Flatten[{checkA[[All,All,2]],checkB[[All,All,2]]},1],Count[#,_Complex]==0&&Count[#,_?Positive]==7&];
+
+{P5,M5,Dn5,Dc5,Iorg5,H5,Dv5}=Flatten[checkcheck];
+r5=Max[Re[Eigenvalues[J]]];
+phck5=Max[{eh*ω*Vhp*P5/(Wch5*η), ef*(Vfd*Dc5+μ*Vfm*M5)/(ϕ*Wcf5)}];
+Wci = Wnf5>0&&Wnh5>0 &&Wnm5>0&&Wcf5>0&&Wch5>0 &&Wcm5>0;
+positioningrad = 1;
+eqbmomega [[positioningrad,All]] = {P5,M5,Dn5,Dc5,Iorg5,H5,Dv5,μ,r5, phck5,  Wnf5,Wnh5, Wnm5, Wcf5,Wch5, Wcm5};
+
+While[Total[Boole[Positive[{P5,M5,Dn5,Dc5,Iorg5,H5,Dv5}]]]==7&&r5<0&&phck5<19.4&&Wci&&positioningrad<100&& μ<25,
+μ = μ+0.2;
+
+checkB = {};
+checkA =Solve[{P==solex2[[1,1]], M==solex2[[1,2]],Dn==solex2[[1,3]],Iorg==solex2[[1,4]], H==solex2[[1,5]], Dv==solex2[[1,6]],dDc==0},{P,M,Dn,Dc,Iorg, H, Dv}]/. Rule-> List;
+If[Dimensions[solex2][[1]]==2,
+checkB =Solve[{P==solex2[[2,1]], M==solex2[[2,2]],Dn==solex2[[2,3]],Iorg==solex2[[2,4]], H==solex2[[2,5]], Dv==solex2[[2,6]],dDc==0},{P,M,Dn,Dc,Iorg, H, Dv}]/. Rule-> List
+];
+ checkcheck = Select[Flatten[{checkA[[All,All,2]],checkB[[All,All,2]]},1],Count[#,_Complex]==0&&Count[#,_?Positive]==7&];
+
+If[Dimensions[checkcheck][[1]]==1,
+
+{P5,M5,Dn5,Dc5,Iorg5,H5,Dv5}=Flatten[checkcheck];
+r5=Max[Re[Eigenvalues[J]]];
+phck5=Max[{eh*ω*Vhp*P5/(Wch5*η), ef*(Vfd*Dc5+μ*Vfm*M5)/(ϕ*Wcf5)}];
+Wci = Wnf5>0&&Wnh5>0 &&Wnm5>0&& Wcf5>0&&Wch5>0 &&Wcm5>0;
+eqbmomega [[positioningrad,All]] = {P5,M5,Dn5,Dc5,Iorg5,H5,Dv5,μ,r5, phck5,  Wnf5,Wnh5, Wnm5, Wcf5,Wch5, Wcm5};
+positioningrad++;
+,Break[];
+
+];
+];
+eqbmomega,
+{rep,1,reps}];
+
+Export[FileNameJoin@{"Sc"<>ToString[sc]<>"_mu_gradient_1pt5_.csv"},Flatten[muoutput,1]];
+INoutput= ParallelTable[
+
+{IN,q,l,Vpn,Vhp, Vfd, Vfm, Vmd, Vmn,rm,rh,rf,exm,exf,exh,tp,th, tm, tf,η,ω,μ,ϕ,ef,eh}= p1[[rep,1;;25]];
+
+checkB = {};
+checkA =Solve[{P==solex2[[1,1]], M==solex2[[1,2]],Dn==solex2[[1,3]],Iorg==solex2[[1,4]], H==solex2[[1,5]], Dv==solex2[[1,6]],dDc==0},{P,M,Dn,Dc,Iorg, H, Dv}]/. Rule-> List;
+If[Dimensions[solex2][[1]]==2,
+checkB =Solve[{P==solex2[[2,1]], M==solex2[[2,2]],Dn==solex2[[2,3]],Iorg==solex2[[2,4]], H==solex2[[2,5]], Dv==solex2[[2,6]],dDc==0},{P,M,Dn,Dc,Iorg, H, Dv}]/. Rule-> List
+];
+ checkcheck = Select[Flatten[{checkA[[All,All,2]],checkB[[All,All,2]]},1],Count[#,_Complex]==0&&Count[#,_?Positive]==7&];
+{P5,M5,Dn5,Dc5,Iorg5,H5,Dv5}=Flatten[checkcheck];
+r5=Max[Re[Eigenvalues[J]]];
+phck5=Max[{eh*ω*Vhp*P5/(Wch5*η), ef*(Vfd*Dc5+μ*Vfm*M5)/(ϕ*Wcf5)}];
+Wci = Wnf5>0&&Wnh5>0 &&Wnm5>0&&Wcf5>0&&Wch5>0 &&Wcm5>0;
+ω2 = ω;
+IN2 = IN;
+μ2 = μ;
+eqbmomega = ConstantArray[ConstantArray[NA,16],100];
+ω = ω2;
+IN = IN2;
+μ = μ2;
+While[Total[Boole[Positive[{P5,M5,Dn5,Dc5,Iorg5,H5,Dv5}]]]==7&&r5<0&&phck5<19.4&&Wci&& IN>0,
+
+IN =IN-1;
+
+checkB = {};
+checkA =Solve[{P==solex2[[1,1]], M==solex2[[1,2]],Dn==solex2[[1,3]],Iorg==solex2[[1,4]], H==solex2[[1,5]], Dv==solex2[[1,6]],dDc==0},{P,M,Dn,Dc,Iorg, H, Dv}]/. Rule-> List;
+If[Dimensions[solex2][[1]]==2,
+checkB =Solve[{P==solex2[[2,1]], M==solex2[[2,2]],Dn==solex2[[2,3]],Iorg==solex2[[2,4]], H==solex2[[2,5]], Dv==solex2[[2,6]],dDc==0},{P,M,Dn,Dc,Iorg, H, Dv}]/. Rule-> List
+];
+ checkcheck = Select[Flatten[{checkA[[All,All,2]],checkB[[All,All,2]]},1],Count[#,_Complex]==0&&Count[#,_?Positive]==7&];
+If[Dimensions[checkcheck][[1]]==1,
+{P5,M5,Dn5,Dc5,Iorg5,H5,Dv5}=Flatten[checkcheck];
+r5=Max[Re[Eigenvalues[J]]];
+phck5=Max[{eh*ω*Vhp*P5/(Wch5*η), ef*(Vfd*Dc5+μ*Vfm*M5)/(ϕ*Wcf5)}];
+Wci = Wnf5>0&&Wnh5>0 &&Wnm5>0&&Wcf5>0&&Wch5>0 &&Wcm5>0;,
+Break[]];
+
+];
+IN = IN+1;
+checkB = {};
+checkA =Solve[{P==solex2[[1,1]], M==solex2[[1,2]],Dn==solex2[[1,3]],Iorg==solex2[[1,4]], H==solex2[[1,5]], Dv==solex2[[1,6]],dDc==0},{P,M,Dn,Dc,Iorg, H, Dv}]/. Rule-> List;
+If[Dimensions[solex2][[1]]==2,
+checkB =Solve[{P==solex2[[2,1]], M==solex2[[2,2]],Dn==solex2[[2,3]],Iorg==solex2[[2,4]], H==solex2[[2,5]], Dv==solex2[[2,6]],dDc==0},{P,M,Dn,Dc,Iorg, H, Dv}]/. Rule-> List
+];
+ checkcheck = Select[Flatten[{checkA[[All,All,2]],checkB[[All,All,2]]},1],Count[#,_Complex]==0&&Count[#,_?Positive]==7&];
+
+{P5,M5,Dn5,Dc5,Iorg5,H5,Dv5}=Flatten[checkcheck];
+r5=Max[Re[Eigenvalues[J]]];
+phck5=Max[{eh*ω*Vhp*P5/(Wch5*η), ef*(Vfd*Dc5+μ*Vfm*M5)/(ϕ*Wcf5)}];
+Wci = Wnf5>0&&Wnh5>0 &&Wnm5>0&&Wcf5>0&&Wch5>0 &&Wcm5>0;
+positioningrad = 1;
+eqbmomega [[positioningrad,All]] = {P5,M5,Dn5,Dc5,Iorg5,H5,Dv5,IN,r5, phck5,  Wnf5,Wnh5, Wnm5, Wcf5,Wch5, Wcm5};
+
+While[Total[Boole[Positive[{P5,M5,Dn5,Dc5,Iorg5,H5,Dv5}]]]==7&&r5<0&&phck5<19.4&&Wci&&positioningrad<100&& IN<100,
+IN = IN+1;
+
+checkB = {};
+checkA =Solve[{P==solex2[[1,1]], M==solex2[[1,2]],Dn==solex2[[1,3]],Iorg==solex2[[1,4]], H==solex2[[1,5]], Dv==solex2[[1,6]],dDc==0},{P,M,Dn,Dc,Iorg, H, Dv}]/. Rule-> List;
+If[Dimensions[solex2][[1]]==2,
+checkB =Solve[{P==solex2[[2,1]], M==solex2[[2,2]],Dn==solex2[[2,3]],Iorg==solex2[[2,4]], H==solex2[[2,5]], Dv==solex2[[2,6]],dDc==0},{P,M,Dn,Dc,Iorg, H, Dv}]/. Rule-> List
+];
+ checkcheck = Select[Flatten[{checkA[[All,All,2]],checkB[[All,All,2]]},1],Count[#,_Complex]==0&&Count[#,_?Positive]==7&];
+
+If[Dimensions[checkcheck][[1]]==1,
+
+{P5,M5,Dn5,Dc5,Iorg5,H5,Dv5}=Flatten[checkcheck];
+r5=Max[Re[Eigenvalues[J]]];
+phck5=Max[{eh*ω*Vhp*P5/(Wch5*η), ef*(Vfd*Dc5+μ*Vfm*M5)/(ϕ*Wcf5)}];
+Wci = Wnf5>0&&Wnh5>0 &&Wnm5>0&& Wcf5>0&&Wch5>0 &&Wcm5>0;
+eqbmomega [[positioningrad,All]] = {P5,M5,Dn5,Dc5,Iorg5,H5,Dv5,IN,r5, phck5,  Wnf5,Wnh5, Wnm5, Wcf5,Wch5, Wcm5};
+positioningrad++;
+,Break[];
+
+];
+];
+eqbmomega,
+{rep,1,reps}];
+
+Export[FileNameJoin@{"Sc"<>ToString[sc]<>"_IN_gradient_1pt5_.csv"},Flatten[INoutput,1]];
+CloseKernels[]
