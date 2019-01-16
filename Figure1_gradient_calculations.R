@@ -1,7 +1,18 @@
 # Code to verify calculations over gradient
 
 # WARNING: This code takes a significant amount of time to run
-# WARNING: Data output is supplied 
+# WARNING: Each individual gradient file was 2GB, so the raw data are available upon request. They can also be generated using the Mathematica code provided.
+# WARNING: Data output to create the supplemental figure is supplied 
+
+require(diagram) # version 1.6.4
+require(fmsb) # version 0.6.3
+require(abind) # version 1.4-5
+source("plotmat_RWB.R")
+source("foodweb_allANDfoodweb_all_err.R")
+source("association_function.R")
+source("Figure1_gradient.R")
+require(tidyverse) # version 1.2.1
+require(ggpubr) # version 0.2
 
 # Draw omega gradient trajectories ----------------------------------------------
 
